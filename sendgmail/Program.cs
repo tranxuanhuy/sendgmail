@@ -14,13 +14,21 @@ namespace mysendemail
 
             foreach (var item in collection)
             {
+
                 SmtpMail oMail = new SmtpMail("TryIt");
                 SmtpClient oSmtp = new SmtpClient();
 
                 // Set sender email address, please change it to yours
                 oMail.From = "tranxuanhuy227@gmail.com";
                 // Set recipient email address, please change it to yours
-                oMail.To = item+"@gmail.com";
+                if (!item.Contains("\t"))
+                {
+                    oMail.To = item + "@gmail.com"; 
+                }
+                else
+                {
+                    oMail.To = item.Split('\t')[0] + "@gmail.com";
+                }
 
                 // Set email subject
                 oMail.Subject = "test email from c# project";
